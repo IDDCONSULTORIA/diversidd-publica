@@ -4064,7 +4064,7 @@ window.addEventListener('click',function(ev){
 <meta content="ca_ES" property="og:locale:alternate"/>
 <meta content="https://diversidd.iddconsultoria.com/diversidd-redes.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://diversidd.iddconsultoria.com/#organizacion", "name": "Diversidd", "url": "https://diversidd.iddconsultoria.com/", "logo": "https://diversidd.iddconsultoria.com/diversidd-redes.png", "email": "diversidad@diversidd.com", "sameAs": ["https://www.instagram.com/diversidd_/", "https://www.linkedin.com/company/diversidd/"], "parentOrganization": {"@type": "Organization", "name": "IDD Consultoría (Innovación y Desarrollo Directivo, S.L.)", "url": "https://www.iddconsultoria.com/"}}, {"@type": "WebPage", "@id": "https://diversidd.iddconsultoria.com/en/areas/liderazgo-inclusivo/#pagina", "url": "https://diversidd.iddconsultoria.com/en/areas/liderazgo-inclusivo/", "name": "Inclusive leadership | Diversidd", "description": "Lead diverse teams, make more conscious decisions and build belonging.", "inLanguage": "en", "isPartOf": {"@id": "https://diversidd.iddconsultoria.com/#web"}, "publisher": {"@id": "https://diversidd.iddconsultoria.com/#organizacion"}, "text": "Thematic area 01 · Inclusive leadership Lead so more people can contribute and progress. Lead diverse teams, make more conscious decisions and build belonging. Request a proposal On this page Content Solutions Eco · Inclusive leadership I'm Eco, from Inclusive leadership. Hand on heart, because leading starts with listening and making room for everyone. 01 · Content Training topics We adapt the depth and examples to the team’s responsibilities, starting point and real situations. 01 Awareness and understanding. 02 Inclusive leadership capabilities. 03 Building inclusive cultures. 04 Inclusion in talent management. 05 Protocols and impact measurement. 02 · Solutions Services for organisations We can deliver a focused intervention or combine several services into a pathway adapted to the organisation. 01 Practical, experiential workshops, in person and online. 02 Inclusive coaching and mentoring programmes. 03 Inclusive leadership assessments for organisations. 04 Inclusive leadership training. 05 Design of protocols and strategies to foster an inclusive leadership culture. 06 Talks and sessions for corporate events."}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://diversidd.iddconsultoria.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Areas", "item": "https://diversidd.iddconsultoria.com/en/#areas"}, {"@type": "ListItem", "position": 3, "name": "Inclusive leadership", "item": "https://diversidd.iddconsultoria.com/en/areas/liderazgo-inclusivo/"}]}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://diversidd.iddconsultoria.com/#organizacion", "name": "Diversidd", "url": "https://diversidd.iddconsultoria.com/", "logo": "https://diversidd.iddconsultoria.com/diversidd-redes.png", "contactPoint": {"@type": "ContactPoint", "contactType": "customer service", "url": "https://diversidd.iddconsultoria.com/contacto/", "availableLanguage": ["es", "ca", "en"]}, "sameAs": ["https://www.instagram.com/diversidd_/", "https://www.linkedin.com/company/diversidd/"], "parentOrganization": {"@type": "Organization", "name": "IDD Consultoría (Innovación y Desarrollo Directivo, S.L.)", "url": "https://www.iddconsultoria.com/"}}, {"@type": "WebPage", "@id": "https://diversidd.iddconsultoria.com/en/areas/liderazgo-inclusivo/#pagina", "url": "https://diversidd.iddconsultoria.com/en/areas/liderazgo-inclusivo/", "name": "Inclusive leadership | Diversidd", "description": "Lead diverse teams, make more conscious decisions and build belonging.", "inLanguage": "en", "isPartOf": {"@id": "https://diversidd.iddconsultoria.com/#web"}, "publisher": {"@id": "https://diversidd.iddconsultoria.com/#organizacion"}, "text": "Thematic area 01 · Inclusive leadership Lead so more people can contribute and progress. Lead diverse teams, make more conscious decisions and build belonging. Request a proposal On this page Content Solutions Eco · Inclusive leadership I'm Eco, from Inclusive leadership. Hand on heart, because leading starts with listening and making room for everyone. 01 · Content Training topics We adapt the depth and examples to the team’s responsibilities, starting point and real situations. 01 Awareness and understanding. 02 Inclusive leadership capabilities. 03 Building inclusive cultures. 04 Inclusion in talent management. 05 Protocols and impact measurement. 02 · Solutions Services for organisations We can deliver a focused intervention or combine several services into a pathway adapted to the organisation. 01 Practical, experiential workshops, in person and online. 02 Inclusive coaching and mentoring programmes. 03 Inclusive leadership assessments for organisations. 04 Inclusive leadership training. 05 Design of protocols and strategies to foster an inclusive leadership culture. 06 Talks and sessions for corporate events."}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://diversidd.iddconsultoria.com/en/"}, {"@type": "ListItem", "position": 2, "name": "Areas", "item": "https://diversidd.iddconsultoria.com/en/#areas"}, {"@type": "ListItem", "position": 3, "name": "Inclusive leadership", "item": "https://diversidd.iddconsultoria.com/en/areas/liderazgo-inclusivo/"}]}]}</script>
 </head>
 <body data-area="liderazgo" data-demo-design="editorial" style="--accent:#dfcc74">
 <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -5494,10 +5494,10 @@ const PILLS=[
    y las consultas del formulario se envían al formulario de contacto de la tienda (llegan al correo de la tienda).
    Mientras esté vacío: pago «próximamente» y consultas a diversidad@diversidd.com. */
 // 24-11-2026: tienda compartida con IDD Consultoría (www.iddconsultoria.com). Las variantes se leen de la tienda: https://www.iddconsultoria.com/products/<url>.js
-// consultas:false → el formulario sigue enviando a diversidad@diversidd.com (no al contacto de la tienda de IDD)
+// consultas:true → cada solicitud va a diversidad@diversidd.com (FormSubmit) Y al contacto de la tienda de IDD en Shopify (iddinfo@iddconsultoria.com)
 // El carrito se crea por la API pública del canal «Botón de compras» (24-11-2026): así las píldoras NO salen en la web de IDD
 // (no están en «Tienda online») y el pago funciona. tienda + clave: del código del Botón de compras (la clave es pública, va en webs).
-const SHOPIFY={dominio:'www.iddconsultoria.com',tienda:'grupoidd.myshopify.com',clave:'9896dfaa67ec288c53bf92d13d2ea6ee',consultas:false,variantes:{'acoso-cero':'59652418830600','acoso-laboral':'59652456218888','comunicacion-inclusiva':'59652472602888','edadismo':'59652479254792','desconexion-digital':'59652486037768','sesgos-inconscientes':'59664646799624','derechos-lgtbi':'59664707977480'}};
+const SHOPIFY={dominio:'www.iddconsultoria.com',tienda:'grupoidd.myshopify.com',clave:'9896dfaa67ec288c53bf92d13d2ea6ee',consultas:true,variantes:{'acoso-cero':'59652418830600','acoso-laboral':'59652456218888','comunicacion-inclusiva':'59652472602888','edadismo':'59652479254792','desconexion-digital':'59652486037768','sesgos-inconscientes':'59664646799624','derechos-lgtbi':'59664707977480'}};
 function shopifyCheckout(items){ // true si la cesta se puede pagar ya en Shopify (todas sus píldoras conectadas)
  return !!(SHOPIFY.tienda&&SHOPIFY.clave&&items.length&&items.every(x=>SHOPIFY.variantes[x.id]));
 }
@@ -5944,13 +5944,20 @@ function contactForm(){
   status(t('Enviando…','Enviant…','Sending…'),true);
   let ok=false;
   if(SHOPIFY.dominio&&SHOPIFY.consultas){
-   // Formulario de contacto de la tienda Shopify: se abre en otra pestaña (Shopify puede pedir una verificación anti-spam)
-   const sf=document.createElement('form');sf.method='POST';sf.target='_blank';sf.action=`https://${SHOPIFY.dominio.replace(/^https?:\/\//,'').replace(/\/$/,'')}/contact`;sf.acceptCharset='UTF-8';
-   const add=(n,v)=>{const i=document.createElement('input');i.type='hidden';i.name=n;i.value=v;sf.append(i);};
-   add('form_type','contact');add('utf8','✓');add('contact[name]',val('contact-name'));add('contact[email]',val('contact-email'));add('contact[phone]',val('contact-phone'));
-   add('contact[body]',subject+'\n\n'+Object.entries(data).map(([k,v])=>`${k}: ${v}`).join('\n'));
-   document.body.append(sf);sf.submit();sf.remove();ok=true;
-  }else try{
+   // 25-11-2026: la solicitud también va al formulario de contacto de la tienda de IDD (Shopify → iddinfo@iddconsultoria.com).
+   // Se envía por debajo (iframe oculto) para no sacar a la persona de la web; el aviso de éxito depende del envío principal.
+   try{
+    let fr=document.getElementById('dvd-shopify-contacto');
+    if(!fr){fr=document.createElement('iframe');fr.id='dvd-shopify-contacto';fr.name='dvd-shopify-contacto';fr.title='';fr.setAttribute('aria-hidden','true');fr.tabIndex=-1;fr.style.cssText='position:absolute;width:1px;height:1px;border:0;left:-9999px';document.body.append(fr);}
+    const sf=document.createElement('form');sf.method='POST';sf.target='dvd-shopify-contacto';sf.action=`https://${SHOPIFY.dominio.replace(/^https?:\/\//,'').replace(/\/$/,'')}/contact`;sf.acceptCharset='UTF-8';sf.style.display='none';
+    const add=(n,v)=>{const i=document.createElement('input');i.type='hidden';i.name=n;i.value=v;sf.append(i);};
+    add('form_type','contact');add('utf8','✓');add('contact[name]',val('contact-name'));add('contact[email]',val('contact-email'));add('contact[phone]',val('contact-phone'));
+    add('contact[Origen]','Web Diversidd (diversidd.iddconsultoria.com)'); // Shopify pone cada campo en su línea del correo: así el equipo de IDD sabe que es de Diversidd
+    add('contact[body]','SOLICITUD DE DIVERSIDD · web diversidd.iddconsultoria.com\n'+subject+'\n\n'+Object.entries(data).map(([k,v])=>`${k}: ${v}`).join('\n'));
+    document.body.append(sf);sf.submit();setTimeout(()=>sf.remove(),5000);
+   }catch(err){}
+  }
+  try{
    const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),15000);
    const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},signal:ctl.signal,
     body:JSON.stringify({...data,_subject:subject,_replyto:val('contact-email'),_template:'table',_captcha:'false'})});
@@ -5963,11 +5970,9 @@ function contactForm(){
    say(t('¡Recibido! Tu solicitud ya está en manos del equipo. Te escribiremos pronto.','Rebut! La teva sol·licitud ja és en mans de l’equip. T’escriurem aviat.','Received! Your request is now with the team. We will be in touch soon.'),null,{open:true,keep:true});
    form.reset();progress();
   }else{
-   const body=Object.entries(data).map(([k,v])=>`${k}: ${v}`).join('\n')+'\n';
-   const href=`mailto:${DEST}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-   if(st){st.dataset.dvdState='error';st.textContent='';st.append(t('No hemos podido enviarla ahora mismo. ','No l’hem pogut enviar ara mateix. ','We could not send it right now. '));
-    const a=document.createElement('a');a.href=href;a.textContent=t('Envíala por correo con un clic','Envia-la per correu amb un clic','Send it by email in one click');st.append(a,'.');}
-   say(t('Vaya, no ha salido. Tienes debajo del botón un enlace para enviarla por correo; ya va todo escrito.','Vaja, no ha sortit. Tens sota el botó un enllaç per enviar-la per correu; ja hi va tot escrit.','Oops, it did not go through. Below the button there is a link to send it by email, already filled in.'),null,{open:true,keep:true});
+   // 25-11-2026: sin enlace al correo (todo lleva a la solicitud): se pide volver a intentarlo
+   if(st){st.dataset.dvdState='error';st.textContent=t('No hemos podido enviarla ahora mismo. Vuelve a intentarlo en unos minutos; tus datos siguen escritos.','No l’hem pogut enviar ara mateix. Torna-ho a provar d’aquí a uns minuts; les teves dades continuen escrites.','We could not send it right now. Please try again in a few minutes; your details are still filled in.');}
+   say(t('Vaya, no ha salido. Vuelve a pulsar «Enviar» en unos minutos: no se ha borrado nada.','Vaja, no ha sortit. Torna a prémer «Enviar» d’aquí a uns minuts: no s’ha esborrat res.','Oops, it did not go through. Press «Send» again in a few minutes: nothing has been deleted.'),null,{open:true,keep:true});
   }
  },true);
 }
