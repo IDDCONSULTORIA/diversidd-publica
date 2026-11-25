@@ -5084,12 +5084,24 @@ const PALETTE=['#ff4fa3','#ffd60a','#2d3dff','#12b76a','#ff4422','#a98bff','#ff8
 const WORDS={es:['Diversidad','Igualdad','Inclusión','Respeto','Equidad','Pertenencia','Escucha','Liderazgo','Sin sesgos','Accesibilidad','Todas las personas'],ca:['Diversitat','Igualtat','Inclusió','Respecte','Equitat','Pertinença','Escolta','Lideratge','Sense biaixos','Accessibilitat','Totes les persones'],en:['Diversity','Equality','Inclusion','Respect','Equity','Belonging','Listening','Leadership','No bias','Accessibility','Everyone']};
 
 /* ================= ESTADO DEL RECORRIDO ================= */
-function loadState(){try{return JSON.parse(sessionStorage.getItem('dvd-guias'))||{}}catch(e){return {}}}
+// 25-11-2026: las áreas visitadas, el guía elegido y la cesta se guardan en el navegador del visitante (localStorage):
+// se mantienen aunque salga de la web y vuelva otro día. El resto (posición, saludos del guía) es solo de esta visita (sessionStorage).
+const PERSISTE=['visited','chosen','cart'];
+function loadState(){
+ let v={},p={};
+ try{v=JSON.parse(sessionStorage.getItem('dvd-guias'))||{}}catch(e){}
+ try{p=JSON.parse(localStorage.getItem('dvd-guias-recuerdo'))||{}}catch(e){}
+ PERSISTE.forEach(k=>{if(p[k]!==undefined&&(v[k]===undefined||(Array.isArray(v[k])&&!v[k].length)))v[k]=p[k];});
+ return v;
+}
 function state(){
  try{const p=window.parent;if(p&&p!==window){if(!p.__DVD_STATE__)p.__DVD_STATE__=loadState();return p.__DVD_STATE__;}}catch(e){}
  return window.__DVD_STATE__||(window.__DVD_STATE__=loadState());
 }
-function save(){try{sessionStorage.setItem('dvd-guias',JSON.stringify(state()))}catch(e){}}
+function save(){const st=state();
+ try{sessionStorage.setItem('dvd-guias',JSON.stringify(st))}catch(e){}
+ try{const p={};PERSISTE.forEach(k=>{if(st[k]!==undefined)p[k]=st[k];});localStorage.setItem('dvd-guias-recuerdo',JSON.stringify(p))}catch(e){}
+}
 const S=state();S.visited=S.visited||[];S.said=S.said||{};S.seen=S.seen||{};S.views=S.views||0;
 // a partir de la tercera página la persona ya sabe de qué va: el guía se queda discreto en su esquina y solo habla si lo tocas
 const calm=()=>S.views>=3;
