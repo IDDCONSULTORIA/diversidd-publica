@@ -4733,8 +4733,10 @@ main>section,main>.view,main .view,#inicio,#experiencia,#servicios,#areas,#como,
 .dvd-pill-facts{list-style:none;display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:0 0 30px}
 .dvd-pill-facts li{display:flex;align-items:baseline;gap:7px;padding:9px 16px;border-radius:999px;background:#fff;border:1.5px solid var(--dvd-ink,#191d52);font:600 13px/1.2 "Atkinson Hyperlegible",Arial,sans-serif;color:var(--dvd-ink,#191d52)}
 .dvd-pill-facts b{font:800 19px/1 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;color:#d9467f}
-.dvd-pill-grid{list-style:none;padding:0;margin:0 0 30px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-@media (min-width:1280px){.dvd-pill-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.dvd-pill-grid{list-style:none;padding:0;margin:0 0 30px;display:flex;flex-wrap:wrap;justify-content:center;gap:18px}
+.dvd-pill-grid>li{flex:0 0 calc((100% - 18px)/2);min-width:0;display:flex}
+.dvd-pill-grid>li>.dvd-pill{flex:1}
+@media (min-width:1280px){.dvd-pill-grid>li{flex-basis:calc((100% - 54px)/4)}}
 .dvd-pill.dvd-pill-pack{background:var(--dvd-ink,#191d52);color:#fff;box-shadow:4px 4px 0 #ffd60a;background-image:linear-gradient(90deg,var(--p-pink) 0 12.5%,var(--p-yellow) 0 25%,var(--p-blue) 0 37.5%,var(--p-green) 0 50%,var(--p-red) 0 62.5%,var(--p-lilac) 0 75%,var(--p-orange) 0 87.5%,var(--p-mint) 0);background-size:100% 10px;background-repeat:no-repeat;padding-top:30px}
 .dvd-pill.dvd-pill-pack h3,.dvd-pill.dvd-pill-pack .dvd-pill-foot strong{color:#fff}
 .dvd-pill.dvd-pill-pack .dvd-pill-desc{color:#d9dbf2}
@@ -4795,7 +4797,7 @@ main>section,main>.view,main .view,#inicio,#experiencia,#servicios,#areas,#como,
 .dvd-pill-dialog li{margin-bottom:6px}
 .dvd-pill-dialog .dvd-pill-foot{padding-top:14px;border-top:1px solid #e6e2f2}
 @media (max-width:760px){
- .dvd-pill-grid{grid-template-columns:minmax(0,1fr);gap:14px}
+ .dvd-pill-grid{gap:14px}.dvd-pill-grid>li{flex-basis:100%}
  .dvd-cart-btn{bottom:14px;height:42px}
  .dvd-cart-lines li{gap:8px;padding:11px 0}
  .dvd-cart-qty{gap:5px}
@@ -4863,6 +4865,9 @@ html{scroll-padding-top:calc(var(--head-h,72px) + 56px)}
 .signal-list>li:last-child:nth-child(odd){grid-column:1/-1}
 .dvd-svc-faq .dvd-more-qa{margin-top:18px}
 .dvd-pill-lang{max-width:62ch;margin:0 0 22px;font-weight:600;color:var(--dvd-ink,#191d52)}
+.dvd-pill-link{align-self:flex-start;margin:-6px 0 14px;padding:4px 0;border:0;background:none;font:700 13px/1.2 "Atkinson Hyperlegible",Arial,sans-serif;color:var(--dvd-blue,#2d3dff);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.dvd-pill-link:hover{color:var(--dvd-ink,#191d52)}
+.dvd-pill-link:focus-visible{outline:2px solid var(--dvd-blue,#2d3dff);outline-offset:3px}
 </style><script data-dvd-guias="">/* Traducciones de las 5 páginas de formato (Formación en directo, Formación online, Consultoría,
    Planes y protocolos, Conferencias). La web original solo las tenía completas en castellano.
    Formato: 'texto en castellano': ['català', 'English'] */
@@ -5569,8 +5574,8 @@ const SHOPIFY={dominio:'www.iddconsultoria.com',tienda:'grupoidd.myshopify.com',
 function shopifyCheckout(items){ // true si la cesta se puede pagar ya en Shopify (todas sus píldoras conectadas)
  return !!(SHOPIFY.tienda&&SHOPIFY.clave&&items.length&&items.every(x=>SHOPIFY.variantes[x.id]));
 }
-async function shopifyPay(btn){
- const items=cartItems();if(!shopifyCheckout(items))return;
+async function shopifyPay(btn,lista){
+ const items=lista||cartItems();if(!shopifyCheckout(items))return;
  const txt=btn.innerHTML;btn.disabled=true;btn.setAttribute('aria-busy','true');btn.textContent=t('Abriendo el pago…','Obrint el pagament…','Opening checkout…');
  const win=window.open('','_blank'); // se abre ya (si no, el navegador lo bloquea) y se le pone la dirección del pago cuando llega
  const lang=({es:'ES',ca:'CA',en:'EN'})[LANG()]||'ES';
@@ -5589,6 +5594,7 @@ async function shopifyPay(btn){
  if(note)note.textContent=t('No hemos podido abrir el pago ahora mismo. Vuelve a intentarlo o pídelas con el formulario.','No hem pogut obrir el pagament ara mateix. Torna-ho a provar o demana-les amb el formulari.','We could not open checkout right now. Please try again or request them using the form.');
 }
 const PILL_PRICE=10;
+const PACK=false; // 25-11-2026: el pack de las 7 se quita (era lo mismo que comprarlas sueltas); se reactivará con precio especial
 const eur=n=>new Intl.NumberFormat(t('es-ES','ca-ES','en-GB'),{style:'currency',currency:'EUR',maximumFractionDigits:n%1?2:0}).format(n);
 function cartItems(){S.cart=(S.cart||[]).filter(x=>PILLS.some(p=>p.id===x.id)&&x.qty>0);return S.cart;}
 function cartCount(){return cartItems().reduce((n,x)=>n+x.qty,0);}
@@ -5608,13 +5614,14 @@ function pillCatalog(){
    <p class="dvd-pill-meta">${pillMeta()}</p>
    <h3>${t(...p.t)}</h3>
    <p class="dvd-pill-desc">${t(...p.d)}</p>
-   <div class="dvd-pill-foot"><strong>${eur(PILL_PRICE)}</strong><span class="dvd-pill-btns"><button type="button" class="dvd-pill-more" data-pill-detail="${p.id}">${t('Ver ficha','Veure la fitxa','Details')}</button><button type="button" class="dvd-pill-buy" data-pill-buy="${p.id}">${t('Comprar','Comprar','Buy')}</button></span></div>
-  </article></li>`).join('')}<li><article class="dvd-pill dvd-pill-pack">
+   <button type="button" class="dvd-pill-link" data-pill-detail="${p.id}">${t('Ver ficha','Veure la fitxa','Details')} <span aria-hidden="true">→</span></button>
+   <div class="dvd-pill-foot"><strong>${eur(PILL_PRICE)}</strong><span class="dvd-pill-btns"><button type="button" class="dvd-pill-more" data-pill-buy="${p.id}" aria-label="${t('Añadir a la cesta','Afegir a la cistella','Add to basket')}: ${t(...p.t)}">${t('Añadir','Afegir','Add')}</button><button type="button" class="dvd-pill-buy" data-pill-now="${p.id}" aria-label="${t('Comprar ya','Compra-la ara','Buy now')}: ${t(...p.t)}">${t('Comprar ya','Compra ara','Buy now')}</button></span></div>
+  </article></li>`).join('')}${PACK?`<li><article class="dvd-pill dvd-pill-pack">
    <p class="dvd-pill-meta"><span>${t('Pack completo','Pack complet','Full pack')}</span><span>7 h</span></p>
    <h3>${t('Las siete píldoras','Les set píndoles','All seven courses')}</h3>
    <p class="dvd-pill-desc">${t('El recorrido entero por la diversidad y la inclusión en la organización, para hacerlo a tu ritmo.','El recorregut sencer per la diversitat i la inclusió a l’organització, per fer-lo al teu ritme.','The whole journey through diversity and inclusion at work, at your own pace.')}</p>
    <div class="dvd-pill-foot"><strong>${eur(PILL_PRICE*PILLS.length)}</strong><button type="button" class="dvd-pill-buy" data-pill-all>${t('Añadir las 7','Afegir les 7','Add all 7')} <span aria-hidden="true">→</span></button></div>
-  </article></li></ol>`;
+  </article></li>`:''}</ol>`;
  after.after(sec);
  sec.querySelectorAll('.dvd-pill-art').forEach((box,i)=>{const a=artwork(PILLS[i].who);if(a)box.append(a);});
  try{sectionTitles.pildoras=t('Catálogo','Catàleg','Catalogue');}catch(e){}
@@ -5649,6 +5656,7 @@ function cartUI(){
  btn.addEventListener('click',e=>{e.stopPropagation();openCart();});
  document.addEventListener('click',e=>{
   const b=e.target.closest('[data-pill-buy]');if(b){e.preventDefault();e.stopPropagation();addPill(b.dataset.pillBuy,true);return;}
+  const nb=e.target.closest('[data-pill-now]');if(nb){e.preventDefault();e.stopPropagation();const l=[{id:nb.dataset.pillNow,qty:1}];if(shopifyCheckout(l))shopifyPay(nb,l);else addPill(nb.dataset.pillNow,true);return;}
   const d=e.target.closest('[data-pill-detail]');if(d){e.preventDefault();e.stopPropagation();openPill(d.dataset.pillDetail);return;}
   if(e.target.closest('[data-pill-all]')){e.preventDefault();e.stopPropagation();const c=cartItems();PILLS.forEach(p=>{if(!c.some(x=>x.id===p.id))c.push({id:p.id,qty:1});});save();renderCart();openCart();return;}
   const m=e.target.closest('[data-cart-minus],[data-cart-plus],[data-cart-del]');
@@ -5684,10 +5692,10 @@ function openPill(id){
   <h2 id="dvd-pill-dialog-title">${t(...p.t)}</h2>
   <p>${t(...p.d)}</p>
   <ul>${bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
-  <div class="dvd-pill-foot"><strong>${eur(PILL_PRICE)}</strong><button type="button" class="dvd-pill-buy" data-pill-buy="${p.id}">${t('Añadir a la cesta','Afegir a la cistella','Add to basket')}</button></div></div>`;
+  <div class="dvd-pill-foot"><strong>${eur(PILL_PRICE)}</strong><span class="dvd-pill-btns"><button type="button" class="dvd-pill-more" data-pill-buy="${p.id}">${t('Añadir a la cesta','Afegir a la cistella','Add to basket')}</button><button type="button" class="dvd-pill-buy" data-pill-now="${p.id}">${t('Comprar ya','Compra ara','Buy now')}</button></span></div></div>`;
  const a=artwork(p.who);if(a)d.querySelector('.dvd-pill-dialog-art').append(a);
  if(!d.open)d.showModal();
- d.querySelector('[data-pill-buy]').addEventListener('click',()=>d.close(),{once:true});
+ d.querySelectorAll('[data-pill-buy],[data-pill-now]').forEach(b=>b.addEventListener('click',()=>d.close(),{once:true}));
 }
 function renderCart(){
  const btn=document.querySelector('.dvd-cart-btn'),dlg=document.querySelector('.dvd-cart');if(!btn||!dlg)return;
