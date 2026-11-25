@@ -5071,6 +5071,8 @@ html{scroll-padding-top:calc(var(--head-h,72px) + 56px)}
 .dvd-pill-link{align-self:flex-start;margin:-6px 0 14px;padding:4px 0;border:0;background:none;font:700 13px/1.2 "Atkinson Hyperlegible",Arial,sans-serif;color:var(--dvd-blue,#2d3dff);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 .dvd-pill-link:hover{color:var(--dvd-ink,#191d52)}
 .dvd-pill-link:focus-visible{outline:2px solid var(--dvd-blue,#2d3dff);outline-offset:3px}
+/* 25-11-2026: sin botón de pausa de los personajes (lo pidió Mireia); con «reducir movimiento» del sistema se paran igual */
+.motion-control{display:none!important}
 </style><script data-dvd-guias="">/* Traducciones de las 5 páginas de formato (Formación en directo, Formación online, Consultoría,
    Planes y protocolos, Conferencias). La web original solo las tenía completas en castellano.
    Formato: 'texto en castellano': ['català', 'English'] */
@@ -6315,12 +6317,13 @@ function cupsHero(){
 }
 
 /* ---------- idiomas: texto pequeño «Català · Español · English» en lugar de banderas ---------- */
-function languageNames(){
- const names={ca:'Català',es:'Español',en:'English'};
+function languageNames(){ // 25-11-2026: el selector dice ES · CA · EN (en ese orden); el nombre completo queda para lectores de pantalla
+ const names={es:'Español',ca:'Català',en:'English'};
  document.querySelectorAll('.language-switcher,.page-language-switcher').forEach(nav=>{
   if(nav.dataset.dvd)return;nav.dataset.dvd='1';nav.classList.add('dvd-langs');
-  ['ca','es','en'].forEach(code=>{const a=nav.querySelector(`a[data-language="${code}"]`);if(!a)return;
-   const ab=a.querySelector('abbr');if(ab){ab.textContent=names[code];ab.removeAttribute('title');}
+  ['es','ca','en'].forEach(code=>{const a=nav.querySelector(`a[data-language="${code}"]`);if(!a)return;
+   const ab=a.querySelector('abbr');if(ab){ab.textContent=code.toUpperCase();ab.removeAttribute('title');}
+   a.setAttribute('aria-label',names[code]);a.setAttribute('title',names[code]);
    a.querySelectorAll('span').forEach(x=>x.remove());nav.append(a);});
  });
 }
