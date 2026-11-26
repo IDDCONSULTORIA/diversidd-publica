@@ -38,4 +38,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://diversidd.iddconsultoria.com/sitemap.xml
+Sitemap: https://www.diversidd.com/sitemap.xml

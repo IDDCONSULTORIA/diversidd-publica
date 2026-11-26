@@ -4045,7 +4045,7 @@ window.addEventListener('click',function(ev){
 <meta content="es_ES" property="og:locale"/>
 <meta content="ca_ES" property="og:locale:alternate"/>
 <meta content="en_GB" property="og:locale:alternate"/>
-<meta content="https://diversidd.iddconsultoria.com/diversidd-redes.png" property="og:image"/>
+<meta content="https://www.diversidd.com/diversidd-redes.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
 </head>
 <body data-demo-design="editorial" style="--accent:#dfcc74">
@@ -5920,8 +5920,8 @@ function contactForm(){
     const sf=document.createElement('form');sf.method='POST';sf.target='dvd-shopify-contacto';sf.action=`https://${SHOPIFY.dominio.replace(/^https?:\/\//,'').replace(/\/$/,'')}/contact`;sf.acceptCharset='UTF-8';sf.style.display='none';
     const add=(n,v)=>{const i=document.createElement('input');i.type='hidden';i.name=n;i.value=v;sf.append(i);};
     add('form_type','contact');add('utf8','✓');add('contact[name]',val('contact-name'));add('contact[email]',val('contact-email'));add('contact[phone]',val('contact-phone'));
-    add('contact[Origen]','Web Diversidd (diversidd.iddconsultoria.com)'); // Shopify pone cada campo en su línea del correo: así el equipo de IDD sabe que es de Diversidd
-    add('contact[body]','SOLICITUD DE DIVERSIDD · web diversidd.iddconsultoria.com\n'+subject+'\n\n'+Object.entries(data).map(([k,v])=>`${k}: ${v}`).join('\n'));
+    add('contact[Origen]','Web Diversidd (www.diversidd.com)'); // Shopify pone cada campo en su línea del correo: así el equipo de IDD sabe que es de Diversidd
+    add('contact[body]','SOLICITUD DE DIVERSIDD · web www.diversidd.com\n'+subject+'\n\n'+Object.entries(data).map(([k,v])=>`${k}: ${v}`).join('\n'));
     document.body.append(sf);sf.submit();setTimeout(()=>sf.remove(),5000);
    }catch(err){}
   }
